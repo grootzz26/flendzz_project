@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Student Management System</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+        {% if messages %}
+            {% for i in messages %}
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/>
+              <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </symbol>
+            </svg>
+            <div>
+                {{i}}
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            </div>
+            </div>
+
+            {% endfor %}
+        {% endif %}
+    <h1 class="mt-5">Students Details</h1>
+    <table class="table mt-5">
+        <thead>
+            <tr class="row">
+                <th class="col-4">Roll Number</th>
+                <th class="col-3">Name</th>
+                <th class="col-2">DOB</th>
+                <th class="col-2">Marks</th>
+                <th Class="col-1">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if details %}
+            {% for i in details %}
+                {% if i.marks  %}
+                    <tr class="row">
+                    <th class="col-4">{{i.rollnumber}}</th>
+                    <td class="col-3">{{i.name}}</a></td>
+                    <td class="col-2">{{i.DOB}}</td>
+                    <td class="col-2">Added</td>
+                    <td class="col-1"><a href="{% url 'view' i.id  %}">view</a></td>
+                    </tr>
+                {% else %}
+                    <tr class="row">
+                    <th class="col-4">{{i.rollnumber}}</th>
+                    <td class="col-3">{{i.name}}</a></td>
+                    <td class="col-2">{{i.DOB}}</td>
+                    <td class="col-2"><a href="{% url 'add_mark' i.id %}">Need to be add</a></td>
+                    <td class="col-1"><a href="{% url 'view' i.id %}">view</a></td>
+                    </tr>
+                {% endif %}
+        {% endfor %}
+    {% endif %}
+   </tbody>
+    </table>
+    <center><a href="{% url 'add_details' %}"><button class="btn btn-primary mt-5">Add Students</button></a></center>
+    <center><div class="container mt-5">
+        <p>if you filled up the Students Marks Details, let's go to the Result</p>
+        <a href="{% url 'result' %}"><button class="btn btn-success">Result</button></a>
+    </div>
+    </center>
+</div>
+{% endblock content %}

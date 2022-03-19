@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Add Mark</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+
+<form method="POST">
+    {% csrf_token %}
+  <div class="mt-5">
+    <input type="hidden" name='rollnumber' value={{task.rollnumber}} class="form-control">
+  </div>
+  <div class="mb-3">
+    <input type="hidden" name='name' value={{task.name}} class="form-control">
+  </div>
+  <div class="mb-3">
+    <input type="text" name='DOB' value={{task.DOB}} class="form-control">
+  </div>
+    <div class="mb-3">
+    <input type="text" name='marks' value={{task.marks}} class="form-control">
+  </div>
+  <div class="mt-5">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </form>
+</div>
+{% endblock content %}
